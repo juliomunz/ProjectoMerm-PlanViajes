@@ -1,19 +1,28 @@
-import React, { Component } from 'react'
-import Navbar from 'react-bootstrap/Navbar'
+import React, { useState } from 'react';
+import { NavLink, useHistory } from "react-router-dom";
+import {Navbar, Nav} from 'react-bootstrap'
 
-export class Nav extends Component {
-    render() {
-        return (
-            <Navbar bg="primary" variant="dark">
-                <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-                <Nav className="me-auto">
-                    <Nav.Link to="#home">Home</Nav.Link>
-                    <Nav.Link to="#features">Features</Nav.Link>
-                    <Nav.Link to="#pricing">Pricing</Nav.Link>
-                </Nav>
-            </Navbar>
-        )
+export default function Navigation(){
+
+    const history = useHistory();
+    
+    const salir=()=>{
+        sessionStorage.clear()
+        history.push('/')
     }
-}
 
-export default Nav
+    return (
+                <Navbar collapseOnSelect expand="lg" variant="dark" bg="dark">
+                    <Navbar.Brand as={NavLink} to="/Misviajes">Dashboard</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="mr-auto">
+                        </Nav>                      
+                        <Nav>
+                            <Nav.Link as={NavLink} to="/login">Bienvenido/a {sessionStorage.getItem('nombre')}</Nav.Link> 
+                            <Nav.Link as={NavLink} to="/login" onClick={()=>salir()}>Cerrar sesión</Nav.Link>    
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>  
+    )
+}

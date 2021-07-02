@@ -8,6 +8,7 @@ import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+//import Nav from '../components/Nav'
 
 export default function Register () {
     const [nombre, setNombre]=useState('')
@@ -29,8 +30,8 @@ const registrar = async(e) =>{
 
 }
 return (
-    <div className="Header">
-        <h3>Planificador de Viajes</h3>
+    <div className="Header mt-3">
+        <h3> Planificador de Viajes</h3>
         <br />
             <div className="container-registro">
                 <CardGroup>
@@ -42,7 +43,7 @@ return (
                                 <Row>
                                     <Form.Label column lg={6}>Nombre</Form.Label>
                                     <Col>
-                                    <Form.Control type="text" required onChange={(e)=>setNombre(e.target.value)}/>
+                                    <Form.Control type="text" autoFocus required onChange={(e)=>setNombre(e.target.value)}/>
                                     </Col>
                                 </Row>
                                     <br />

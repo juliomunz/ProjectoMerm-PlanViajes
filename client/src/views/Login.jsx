@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import React, { useState } from 'react';
+import Swal from 'sweetalert2'
 
 
 export default function Login () {
@@ -19,16 +20,27 @@ export default function Login () {
         const usuario={correo,contrasena}
         const respuesta=await axios.post('http://localhost:8000/api/user/login', usuario)
         const mensaje=respuesta.data.mensaje
-        history.push('/Misviajes')
+        //history.push('/Misviajes')
         if (mensaje!=='Bienvenido'){
-            alert(mensaje)
+            Swal.fire({
+                icon: 'error',
+                title: mensaje,
+                showConfirmButton: false,
+                timer: 1500
+              })
         }else {
-            alert(mensaje)
-        }
-        //console.log(respuesta)
+            const token=respuesta.data.token
+            const nombre=respuesta.data.nombre
+            const idusuario=respuesta.data.id
+            sessionStorage.setItem('token',token)
+            sessionStorage.setItem('nombre',nombre)
+            sessionStorage.setItem('idusuario',idusuario)
+            history.push('/Misviajes')
+        } //console.log(respuesta)
     }
+
     return (
-        <div className="Header">
+        <div className="Header mt-3">
         <h3>Planificador de Viajes</h3>
         <br />
             <div className="container-login">
@@ -41,7 +53,7 @@ export default function Login () {
                             <Row>
                                 <Form.Label column lg={6}>Email</Form.Label>
                                 <Col>
-                                <Form.Control type="email" required onChange={(e)=>setCorreo(e.target.value)}/>
+                                <Form.Control type="email" autoFocus required onChange={(e)=>setCorreo(e.target.value)}/>
                                 </Col>
                             </Row>
                                 <br />

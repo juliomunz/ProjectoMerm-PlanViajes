@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import ViajesService from '../services/viajes.services';
 import { history, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Navigation from '../components/Nav'
 
 const Misviajes = () => {
     const viajeService = new ViajesService;
@@ -39,7 +40,7 @@ const Misviajes = () => {
 
     return (
         <div className="container">
-
+            <Navigation/>
             <h1>Mis Viajes</h1>
             <Table striped bordered hover>
                 <thead>
@@ -60,10 +61,8 @@ const Misviajes = () => {
                                 <td>{item.estado}</td>
                                 <td>
                                     <div>
-                                        {/* <Link to={`/edit/${item._id}`}>
-                                            edit |
-                                        </Link> */}
-                                        <Button variant="danger" onClick={() => deleteViajes(item._id)}>Borrar</Button>
+                                    {/* <Button variant="info" onClick={() => updateViaje(item._id)}>Editar</Button> */}
+                                    <Button variant="danger" onClick={() => deleteViajes(item._id)}>Borrar</Button>
                                     </div>
                                 </td>
                             </tr>
@@ -71,9 +70,7 @@ const Misviajes = () => {
                     }
                 </tbody>
             </Table>
-            <Link to ="/create">
-                    create new travell
-            </Link>
+            <Link to ="/create">create new travell</Link>
         </div>
     )
 }

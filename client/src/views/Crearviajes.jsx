@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useHistory, useParams } from "react-router-dom";
 import ViajesService from '../services/viajes.services'
 import moment from 'moment';
+import Navigation from '../components/Nav'
 
 
 const Newtravell = () => {
@@ -34,9 +35,7 @@ const Newtravell = () => {
 
     return (
         <div className="plan-header">
-            <Link to="/Misviajes">
-                <p>Volver al Dashboard</p>
-            </Link>
+             <Navigation/>
             <h3>Planifica tu viaje</h3>
         <div className="plan-form-container">
             <Form onSubmit={onSubmitHandler}>
